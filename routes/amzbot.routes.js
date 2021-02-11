@@ -139,14 +139,14 @@ console.log(req)
 
 
 
-            res.message ("Velichko is fucking suckers")
+        res.status(200).json({ message: 'Velichko is fucking suckers' })
 
 
     }
 
     catch (e) {
         console.log('LOLOdf')
-        res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова Velichko is fucking suckers' })
+        res.status(500).json({ message: 'Velichko is fucking Fagots' })
     }
 
 })
