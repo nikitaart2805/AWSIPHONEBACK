@@ -36,123 +36,129 @@ let interval ;
 
 
 
-router.post('/Offer', async (req,res) => {
-    try {
-    var token = req.body.token
-        var area = req.body.area
-        var filter = req.filters
-console.log(req)
 
 
-            function intervalFunc() {
-
-                OfferStatus = "Searching started"
-                var start = now()
-
-                axios
-                    .post('https://flex-capacity-na.amazon.com/GetOffersForProviderPost', {
-                        "apiVersion": "V2",
-                        "serviceAreaIds":[`${area}`]
-                    }, {
-                        headers: {
-                            "Accept": ":application/json",
-                            "x-amz-access-token": `${token}`,
-                            "Accept-Encoding": "[gzip],[deflate],[br]",
-                            "Connection": "keep-alive",
-                            "Accept-Language": "en-US",
-                            "User-Agent": "iOS/13.6.1(iPhone Darwin) Model/iPhone Platform/iPhone12,5 RabbitiOS/2.66.5",
-                            "Content-Type": "application/json"
-                        }
-                    })
-
-                    .then((res) => {
-                        // rate = res.data.offerList[0].rateInfo.projectedTips
-                        //     offerlist = res.data
-                       console.log(res.data.offerList)
-                        for (var Offersnumers = 0; Offersnumers < res.data.offerList.length; Offersnumers++) {
-                            offerId = res.data.offerList[Offersnumers].offerId;
-                            Area = res.data.offerList[Offersnumers].serviceAreaId;
-                            // console.log("Количество офферов =  " + res.data.offerList.length);
-                            // console.log("Номер оффера   " + res.data.offerList[Offersnumers].offerId);
-
-                            console.log("Эрия номер   " + res.data.offerList[Offersnumers].serviceAreaId);
-
-                            if (Area == filter[0] || Area == filter[1] || Area == filter[2]) {
-                                axios
-                                    .post('https://flex-capacity-na.amazon.com/AcceptOffer', {
-                                        "offerId": `${offerId}`
-                                    }, {
-                                        headers: {
-
-                                            "x-amz-access-token": `${token}`,
+        router.post('/Offer',  async (req,res) => {
+            try {
 
 
-                                            "User-Agent": "iOS/13.6.1(iPhone Darwin) Model/iPhone Platform/iPhone12,5 RabbitiOS/2.66.5"
-
-                                        }
-
-                                    }).catch(error=>{
-                                    Offer_status = "Missed Block"
-                                    console.log(Offer_status)
-
-                                });
+                // console.log(UserID)
 
 
-                                Offer_status = "Accepted"
-                                console.log(Offer_status)
-                            }
-                        }
-                    })
+                    var token = req.body.token
+                    var area = req.body.area
+                    var filter = req.filters
 
-                    .catch(error=>{
+                    // console.log(status)
 
-                        if (statuserorr === 400){
-                            OfferStatus = "Too hot"
+                    function intervalFunc() {
 
+                        OfferStatus = "Searching started"
+                        var start = now()
+
+                        axios
+                            .post('https://flex-capacity-na.amazon.com/GetOffersForProviderPost', {
+                                "apiVersion": "V2",
+                                "serviceAreaIds":[`${area}`]
+                            }, {
+                                headers: {
+                                    "Accept": ":application/json",
+                                    "x-amz-access-token": `${token}`,
+                                    "Accept-Encoding": "[gzip],[deflate],[br]",
+                                    "Connection": "keep-alive",
+                                    "Accept-Language": "en-US",
+                                    "User-Agent": "iOS/13.6.1(iPhone Darwin) Model/iPhone Platform/iPhone12,5 RabbitiOS/2.66.5",
+                                    "Content-Type": "application/json"
+                                }
+                            })
+
+                            .then((res) => {
+                                // rate = res.data.offerList[0].rateInfo.projectedTips
+                                //     offerlist = res.data
+                                // console.log(res.data.offerList)
+                                for (var Offersnumers = 0; Offersnumers < res.data.offerList.length; Offersnumers++) {
+                                    offerId = res.data.offerList[Offersnumers].offerId;
+                                    Area = res.data.offerList[Offersnumers].serviceAreaId;
+                                    // console.log("Количество офферов =  " + res.data.offerList.length);
+                                    // console.log("Номер оффера   " + res.data.offerList[Offersnumers].offerId);
+
+                                    console.log("Эрия номер   " + res.data.offerList[Offersnumers].serviceAreaId);
+
+                                    if (Area == filter[0] || Area == filter[1] || Area == filter[2]) {
+                                        axios
+                                            .post('https://flex-capacity-na.amazon.com/AcceptOffer', {
+                                                "offerId": `${offerId}`
+                                            }, {
+                                                headers: {
+
+                                                    "x-amz-access-token": `${token}`,
+
+
+                                                    "User-Agent": "iOS/13.6.1(iPhone Darwin) Model/iPhone Platform/iPhone12,5 RabbitiOS/2.66.5"
+
+                                                }
+
+                                            }).catch(error=>{
+                                            Offer_status = "Missed Block"
+                                            console.log(Offer_status)
+
+                                        });
+
+
+                                        Offer_status = "Accepted"
+                                        console.log(Offer_status)
+                                    }
+                                }
+                            })
+
+                            .catch(error=>{
+                                status = error.response.status
+                                if (status === 400){
+                                    OfferStatus = "Too hot"
+
+                                    clearInterval(refreshIntervalId);
+                                }
+
+                            })
+                        // console.log(status)
+                        if (status == false) {
+                            OfferStatus ="Not searching"
+                            status = true
                             clearInterval(refreshIntervalId);
                         }
 
-                    })
-                // console.log(status)
-                if (status == false) {
-                    OfferStatus ="Not searching"
-                    status = true
-                    clearInterval(refreshIntervalId);
-                }
+                        var end = now()
+                        console.log((start - end).toFixed(6))
 
-                var end = now()
-                console.log((start - end).toFixed(6))
+
+                    }
+
+                    var refreshIntervalId =  setInterval(intervalFunc, 300);
+                    router.post('/stop', async (req,res) => {
+
+                        try {
+
+                            status = false
+                            res.json ({ status })
+                        } catch (e) {
+                            res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
+                        }
+                    })
+
+
+
+
+                    res.json ({ Offer_status , missed_block})
 
 
             }
 
-            var refreshIntervalId =  setInterval(intervalFunc, 300);
-            router.post('/stop', async (req,res) => {
+            catch (e) {
+                console.log('LOLOdf')
+                res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
+            }
 
-                try {
-
-                    status = false
-                    res.json ({ status })
-                } catch (e) {
-                    res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
-                }
-            })
-
-
-
-
-        res.status(200).json({ message: 'Velichko is fucking suckers' })
-
-
-    }
-
-    catch (e) {
-        console.log('LOLOdf')
-        res.status(500).json({ message: 'Velichko is fucking Fagots' })
-    }
-
-})
-
+        })
 
 
 //
