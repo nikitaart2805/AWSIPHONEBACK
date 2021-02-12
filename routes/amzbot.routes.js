@@ -46,8 +46,12 @@ let interval ;
 
 
                     var token = req.body.token
-                    var area = req.body.area
-                    var filter = req.body.filters
+                var area = req.body.area;
+                var filter1 = req.body.filter1;
+                var filter2 = req.body.filter2;
+                var filter3 = req.body.filter3
+                var filter4 = req.body.filter4
+                var filter5 = req.body.filter5
 
                     // console.log(status)
 
@@ -85,7 +89,7 @@ let interval ;
 
                                     console.log("Эрия номер   " + res.data.offerList[Offersnumers].serviceAreaId);
 
-                                    if (Area == filter[0] || Area == filter[1]) {
+                                    if (Area == filter1 || Area == filter2 || Area == filter3 || Area == filter4 || Area == filter5) {
                                         axios
                                             .post('https://flex-capacity-na.amazon.com/AcceptOffer', {
                                                 "offerId": `${offerId}`
