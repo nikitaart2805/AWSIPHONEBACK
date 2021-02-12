@@ -42,12 +42,12 @@ let interval ;
             try {
 
 
-                // console.log(UserID)
+                console.log(req.body)
 
 
                     var token = req.body.token
                     var area = req.body.area
-                    var filter = req.filters
+                    var filter = req.body.filters
 
                     // console.log(status)
 
@@ -73,9 +73,10 @@ let interval ;
                             })
 
                             .then((res) => {
+
                                 // rate = res.data.offerList[0].rateInfo.projectedTips
                                 //     offerlist = res.data
-                                // console.log(res.data.offerList)
+                                console.log(res.data.offerList)
                                 for (var Offersnumers = 0; Offersnumers < res.data.offerList.length; Offersnumers++) {
                                     offerId = res.data.offerList[Offersnumers].offerId;
                                     Area = res.data.offerList[Offersnumers].serviceAreaId;
@@ -84,7 +85,7 @@ let interval ;
 
                                     console.log("Эрия номер   " + res.data.offerList[Offersnumers].serviceAreaId);
 
-                                    if (Area == filter[0] || Area == filter[1] || Area == filter[2]) {
+                                    if (Area == filter[0] || Area == filter[1]) {
                                         axios
                                             .post('https://flex-capacity-na.amazon.com/AcceptOffer', {
                                                 "offerId": `${offerId}`
@@ -101,6 +102,7 @@ let interval ;
                                             }).catch(error=>{
                                             Offer_status = "Missed Block"
                                             console.log(Offer_status)
+                                            console.log(error)
 
                                         });
 
@@ -140,7 +142,7 @@ let interval ;
 
 
 
-                    res.json ({ Offer_status , missed_block})
+                res.status(200).json({ message: 'Ура' })
 
 
             }
