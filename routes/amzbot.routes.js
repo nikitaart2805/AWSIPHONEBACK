@@ -105,7 +105,7 @@ console.log(req)
                     })
 
                     .catch(error=>{
-                      var statuserorr = error.response.status
+
                         if (statuserorr === 400){
                             OfferStatus = "Too hot"
 
