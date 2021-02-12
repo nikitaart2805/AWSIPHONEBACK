@@ -111,15 +111,7 @@ let interval ;
                                 }
                             })
 
-                            .catch(error=>{
-                                status = error.response.status
-                                if (status === 400){
-                                    OfferStatus = "Too hot"
 
-                                    clearInterval(refreshIntervalId);
-                                }
-
-                            })
                         // console.log(status)
                         if (status == false) {
                             OfferStatus ="Not searching"
