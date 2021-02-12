@@ -105,8 +105,8 @@ console.log(req)
                     })
 
                     .catch(error=>{
-                        status = error.response.status
-                        if (status === 400){
+                      var statuserorr = error.response.status
+                        if (statuserorr === 400){
                             OfferStatus = "Too hot"
 
                             clearInterval(refreshIntervalId);
