@@ -105,6 +105,7 @@ let interval ;
 
                                             }).catch(error=>{
                                             OfferStatus = "Missed Block"
+
                                             console.log(Offer_status)
                                             console.log(error)
 
@@ -116,7 +117,15 @@ let interval ;
                                     }
                                 }
                             })
+                            .catch(error=>{
+                                status = error.response.status
+                                if (status === 400){
+                                    OfferStatus = "Too hot"
 
+                                    clearInterval(refreshIntervalId);
+                                }
+
+                            })
 
                         // console.log(status)
                         if (status == false) {
