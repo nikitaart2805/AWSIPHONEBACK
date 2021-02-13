@@ -106,14 +106,14 @@ let interval ;
                                             }).catch(error=>{
                                             OfferStatus = "Missed Block"
 
-                                            console.log(Offer_status)
+                                            console.log(OfferStatus)
                                             console.log(error)
 
                                         });
 
 
                                         OfferStatus = "Accepted"
-                                        console.log(Offer_status)
+                                        console.log(OfferStatus)
                                     }
                                 }
                             })
