@@ -54,10 +54,10 @@ let interval ;
                 var filter5 = req.body.filter5
 
                     // console.log(status)
-
+                OfferStatus = "Searching started"
                     function intervalFunc() {
 
-                        OfferStatus = "Searching started"
+
                         var start = now()
 
                         axios
@@ -107,12 +107,12 @@ let interval ;
                                             OfferStatus = "Missed Block"
 
                                             console.log(OfferStatus)
-                                            console.log(error)
+
 
                                         });
 
 
-                                        OfferStatus = "Accepted"
+                                        OfferStatus = "accepted"
                                         console.log(OfferStatus)
                                     }
                                 }
