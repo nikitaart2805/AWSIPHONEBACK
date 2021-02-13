@@ -8,20 +8,20 @@ const http = require("http")
 const app = express()
 const server = http.createServer(app).listen(PORT, () => console.log(`App has been starte on port ${PORT}...`))
 
-// const io = socketIo(server, {
-//     cors: {
-//         origin: "http://ec2-3-86-29-164.compute-1.amazonaws.com:8080",
-//         credentials: true
-//     }
-// } );
+const io = socketIo(server, {
+    cors: {
+        origin: "http://ec2-3-86-29-164.compute-1.amazonaws.com:8080",
+        credentials: true
+    }
+} );
 
 
 
 
 
 
-//
-// module.exports = io;
+
+module.exports = io;
 
 app.use(express.json({ extended: true }))
 
