@@ -104,14 +104,14 @@ let interval ;
                                                 }
 
                                             }).catch(error=>{
-                                            Offer_status = "Missed Block"
+                                            OfferStatus = "Missed Block"
                                             console.log(Offer_status)
                                             console.log(error)
 
                                         });
 
 
-                                        Offer_status = "Accepted"
+                                        OfferStatus = "Accepted"
                                         console.log(Offer_status)
                                     }
                                 }
