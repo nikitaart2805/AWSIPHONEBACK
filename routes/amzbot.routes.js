@@ -111,9 +111,10 @@ let interval ;
 
                                         });
 
-
+                                        if (OfferStatus != "Missed Block"){
                                         OfferStatus = "accepted"
                                         console.log(OfferStatus)
+                                        }
                                     }
                                 }
                             })
