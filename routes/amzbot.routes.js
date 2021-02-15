@@ -133,9 +133,9 @@ let interval ;
                                                 }
 
                                             }).catch(error=>{
+                                            console.log("not canseled")
 
 
-                                            
 
 
                                         });
