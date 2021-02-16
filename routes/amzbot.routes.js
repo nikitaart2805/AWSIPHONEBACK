@@ -107,7 +107,7 @@ let interval ;
                                             }).catch(error=>{
 
 
-                                            
+
 
 
                                         });
@@ -117,32 +117,7 @@ let interval ;
                                         console.log(OfferStatus)
                                         }
                                     }
-                                    else {
-                                        axios
-                                            .post('https://flex-capacity-na.amazon.com/RejectOffer', {
-                                                "__type": "RejectOfferInput:http://internal.amazon.com/coral/com.amazon.omwbuseyservice.offers/",
-                                                "offerId": `${offerId}`
-                                            }, {
-                                                headers: {
 
-                                                    "x-amz-access-token": `${token}`,
-
-
-                                                    "User-Agent": "iOS/13.6.1(iPhone Darwin) Model/iPhone Platform/iPhone12,5 RabbitiOS/2.66.5"
-
-                                                }
-
-                                            }).catch(error=>{
-                                            console.log("not canseled")
-
-
-
-
-                                        });
-
-
-
-                                    }
                                 }
                             })
                             .catch(error=>{
