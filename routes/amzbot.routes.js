@@ -105,6 +105,7 @@ let interval ;
                                                 }
 
                                             }).catch(error=>{
+                                                console.log(error)
 
 
 
