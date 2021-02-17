@@ -106,7 +106,7 @@ let interval ;
 
                                             }).catch(error=>{
                                                 console.log(error)
-
+                                            OfferStatus = "Missed Block"
 
 
 
