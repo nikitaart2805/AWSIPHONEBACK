@@ -1,6 +1,6 @@
 {
   "ioport" : 5001,
-  "port": 8000,
+  "port": 3000,
   "jwtSecret": "Xyi jui",
   "mongoUri": "mongodb+srv://Mikita:Gomer6723340@flex.shaji.mongodb.net/FLEX?retryWrites=true&w=majority",
   "baseUrl": "http://localhost:5010"
